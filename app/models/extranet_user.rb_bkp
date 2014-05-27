@@ -1,0 +1,14 @@
+class ExtranetUser < ActiveRecord::Base
+  attr_accessible :password, :rl_code, :viewable_code
+
+  def self.import(file)
+    CSV.foreach(file.path, headers: false) do |row|
+      next if row.empty?
+      item = row.first
+      user = ExtranetUser.new
+      user.viewable_code = item.split(' ').first
+      user.password = item.split(' ').last
+      user.save!
+    end
+  end
+end

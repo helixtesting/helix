@@ -1,0 +1,15 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#choose_your_country{
+  margin-bottom:10px;
+  span{
+    margin-right:20px;
+    .country-select{
+      display: inline-block;
+      width: 50%;
+    }
+  }
+
+}

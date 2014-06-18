@@ -16,9 +16,10 @@
 <% if (params["controller"]=="welcome" && params["action"]=="index") %>
     <%= yield %>
 <% else %>
-    <div id="wrapper" style="margin-top:50px">
+    <div id="wrapper" style="<%= 'margin-top:50px;' if user_signed_in? %>">
 
       <!-- Sidebar -->
+      <% if user_signed_in? %>
       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -28,18 +29,19 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Prash</a>
+          <a class="navbar-brand" href="/"><!--Prash--></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <% if user_signed_in? %>
-              <%= render :partial => 'shared/main_menu' %>
+               <%= render :partial => 'shared/main_menu' %>
           <% end %>
           <%= render :partial => 'shared/nav_menu' %>
         </div>
         <!-- /.navbar-collapse -->
       </nav>
+      <% end %>
 
       <div id="page-wrapper">
         <% unless current_user.present? && current_user.admin? %>
@@ -64,9 +66,9 @@
                       <div class="box">
                         <a href="#" class="btn btn-chat">Chat Online</a>
                         <span>Questions? call</span>
-                        <a href="#" class="btn"> <%= @country.locations.where(:location_type_id => 3).first.telephone1 %><!--+234 (0) 810 683 6432--></a>
+                        <a href="#" class="btn"> <%= @country.locations.where(:location_type_id => 4).try(:first).telephone1 rescue '+231 6836432' %><!--+234 (0) 810 683 6432--></a>
                         <span class="or">OR</span>
-                        <a href="#" class="btn add-btn"><%= @country.locations.where(:location_type_id => 3).first.bbm %><!--BB 25BC8A9F--></a>
+                        <a href="#" class="btn add-btn"><%= @country.locations.where(:location_type_id => 4).try(:first).bbm rescue 'BB 25BC8F' %><!--BB 25BC8A9F--></a>
                       </div>
                       <div class="navigation">
                         <%= link_to "buy now", new_order_path, :class => "btn-2" %>
@@ -124,7 +126,7 @@
                           <div class="img">
                             <img src="images/ico-07.png" width="13" height="17" alt="image description"/>
                           </div>
-                          <span>Call <%= @country.locations.where(:location_type_id => 3).first.telephone1 %></span>
+                          <span>Call <%= @country.locations.where(:location_type_id => 4).try(:first).telephone1 rescue '+231 (0) 810683 6432' %></span>
                         </li>
                         <li>
                           <div class="img">
@@ -136,7 +138,7 @@
                           <div class="img">
                             <img src="images/ico-09.png" width="17" height="12" alt="image description"/>
                           </div>
-                          <span><%= @country.locations.where(:location_type_id => 3).first.bbm %></span>
+                          <span><%= @country.locations.where(:location_type_id => 4).try(:first).bbm rescue 'BB 25BC8A9F'  %></span>
                         </li>
                       </ul>
                       <p>Copyright &copy;2013 Helix Testing</p>

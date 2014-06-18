@@ -2,7 +2,9 @@ class ProductDescriptionsController < ApplicationController
   # GET /product_descriptions
   # GET /product_descriptions.json
   def index
-    @product_descriptions = ProductDescription.all
+    #@product_descriptions = ProductDescription.all
+    @country = Country.find(params[:country][:id]) rescue Country.first
+    @product_descriptions = ProductDescription.where(country_id: @country.id)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -2,12 +2,12 @@
 
 <p>
   <b>Name:</b>
-  <%= @product_type.name %>
+  <%= @product_type.title %>
 </p>
 
 <p>
   <b>Description:</b>
-  <%= @product_type.description %>
+  <%= @product_type.body %>
 </p>
 
 <p>
@@ -18,3 +18,4 @@
 
 <%= link_to 'Edit', edit_product_type_path(@product_type) %> |
 <%= link_to 'Back', product_types_path %>
+

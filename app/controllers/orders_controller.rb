@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
   end
 
   def post_back
+   @country = Country.find_by_id(cookies[:country_id])
     respond_to do |format|
       format.html
       format.js

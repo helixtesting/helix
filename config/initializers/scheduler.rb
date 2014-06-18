@@ -1,18 +1,25 @@
 scheduler = Rufus::Scheduler.new
 
-scheduler.every("1m") do
+scheduler.every '1m' do
+  puts 'start status report'
   fetch_emails
+  puts 'End status scheduler'
 end
 
 def fetch_emails
   rlcode = Rlcode.order('created_at').last
   imap = Net::IMAP.new(Settings.imap_server, :ssl => (Settings.imap_ssl ? Settings.imap_ssl == 1 : false))
   imap.login(Settings.imap_email, Settings.imap_password)
+  #imap = Net::IMAP.new('mail.helixtesting.com', :ssl => (Settings.imap_ssl ? Settings.imap_ssl == 1 : false))
+  #imap.login('ddcresults@helixtesting.com', 'Dozerman1')
   imap.examine('INBOX')
   date = DateTime.parse(rlcode.created_at.to_s) unless rlcode.nil?
   since = "#{rlcode.nil? ? '1-Jan-2014' : "#{date.strftime('%d-%b-%Y')}"}"
-  msgs = imap.search(['SINCE', since])
+  #imsgs = imap.search(['SINCE', since])
+  msgs = imap.search(['NEW'])
+  puts "New Messages to be processed are #{msgs}"
   msgs.each do |msgID|
+   puts "Message being processed is #{msgID}"
     _body = imap.fetch(msgID, "RFC822")[0].attr["RFC822"]
 
     require 'mail'
@@ -45,7 +52,9 @@ def fetch_emails
         end
       end
     end
-
+    imap.store(msgID, '+FLAGS', [:Seen])
   end
+  #imap.expunge
+  puts "Fetching emails"
   imap.logout
 end

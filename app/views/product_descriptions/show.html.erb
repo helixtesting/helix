@@ -1,19 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Title:</b>
-  <%= @product_description.title %>
+  <b>Property Name:</b>
+  <%= @product_description.property_title %>
 </p>
 
 <p>
-  <b>Body:</b>
-  <%= @product_description.body %>
+  <b>Description silver kit:</b>
+  <%= @product_description.description_silver_kit %>
 </p>
 
 <p>
-  <b>Product type:</b>
-  <%= @product_description.product_type_id %>
+  <b>Description gold kit:</b>
+  <%= @product_description.description_gold_kit %>
 </p>
+
+<!--<p>-->
+  <!--<b>Product type:</b>-->
+  <!--<%#= @product_description.product_type_id %>-->
+<!--</p>-->
 
 <p>
   <b>Country:</b>
@@ -23,3 +28,4 @@
 
 <%= link_to 'Edit', edit_product_description_path(@product_description) %> |
 <%= link_to 'Back', product_descriptions_path %>
+

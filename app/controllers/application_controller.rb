@@ -10,6 +10,13 @@ class ApplicationController < ActionController::Base
   private
 
   def check_country
-    @country = params[:country].present? ? Country.find_by_id(params[:country][:id]) : Country.last #'Nigeria'
+    if params[:country].present? 
+	@country = Country.find_by_id(params[:country][:id]) 
+     elsif cookies[:country_id].present? 
+	 @country = Country.find_by_id(cookies[:country_id]) 
+     else 
+	 @country = Country.first
+    end
+    cookies[:country_id] = @country.id
   end
 end

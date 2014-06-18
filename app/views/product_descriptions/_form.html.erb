@@ -12,18 +12,17 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :title, 'Property Name' %><br />
-    <%= f.text_field :title %>
+    <%= f.label :property_title, 'Property Name' %><br />
+    <%= f.text_field :property_title %>
   </div>
   <div class="form-group">
-    <%= f.label :body, 'Property Description' %><br />
-    <%= f.text_area :body, rows: 5, cols:40 %>
+    <%= f.label :description_silver_kit, 'Silver Kit Description' %><br />
+    <%= f.text_area :description_silver_kit, rows: 5, cols:40 %>
   </div>
   <div class="form-group">
-    <%#= f.label :product_type_id, 'Product Type' %><br />
-    <%#= f.number_field :product_type_id %>
-    <%= f.label :product_type_id, 'Product type' %><br/>
-    <%= select :product_description, :product_type_id, ProductType.all.collect { |c| [c.name, c.id] }, {:prompt => 'Select Product Type'}, {:class => 'form-control', style: "width: 237px;"} %>
+    <%= f.label :description_gold_kit, 'Gold Kit Description' %><br/>
+    <%= f.text_area :description_gold_kit, rows: 5, cols:40 %>
+    <%#= select :product_description, :product_type_id, ProductType.all.collect { |c| [c.name, c.id] }, {:prompt => 'Select Product Type'}, {:class => 'form-control', style: "width: 237px;"} %>
   </div>
   <div class="form-group">
     <%#= f.label :country_id %><!--br /-->
@@ -35,3 +34,4 @@
     <%= f.submit %>
   </div>
 <% end %>
+

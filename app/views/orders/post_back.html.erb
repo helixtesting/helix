@@ -7,7 +7,7 @@
       <fieldset>
         <div class="section-box section-instruction">
           <h3 class="title">Instructions</h3>
-          <% location = @country.locations.where(location_type_id: 3).first %>
+          <% location = @country.locations.where(location_type_id: 4).first %>
           <div class="col">
             <h4 class="title-3">What to do now</h4>
 
@@ -22,11 +22,11 @@
               <img class="logo-3" src="/assets/ico-17.png" width="85" height="83" alt="image description"/>
               <dl class="details">
                 <dt>Name of Bank:</dt>
-                <dd><%=location.bank_name %></dd>
+                <dd><%=location.try(:bank_name) %></dd>
                 <dt>Account holder:</dt>
-                <dd><%=location.bank_account_holder %></dd>
+                <dd><%=location.try(:bank_account_holder) %></dd>
                 <dt>Account Number</dt>
-                <dd><%=location.bank_account_number %></dd>
+                <dd><%=location.try(:bank_account_number) %></dd>
                 <!--<dt>Type of Account:</dt>-->
                 <!--<dd>Type of Account:</dd>-->
               </dl>

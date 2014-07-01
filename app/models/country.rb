@@ -3,6 +3,6 @@ class Country < ActiveRecord::Base
   has_many :cities
   has_many :states
   has_many :locations
-
+  has_many :product_descriptions
   validates :name, presence: true
 end

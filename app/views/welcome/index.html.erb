@@ -156,7 +156,7 @@
             <span>Just use the form below to find a stroe near you.</span>
 
             <div class="row-area">
-              <%= select_tag :city, options_from_collection_for_select(City.all, "id", "name"), selected: :option, :prompt => 'Select City' %>
+              <%= select_tag :city, options_from_collection_for_select(City.all, "id", "name"), selected: :option ,:prompt=>"Please Select"%>
               <div class="row-btn">
                 <input type="submit" value="Find a Store"/>
               </div>

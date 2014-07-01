@@ -9,6 +9,7 @@
           <th>Title</th>
           <th>Body</th>
           <th>Country</th>
+          <th>Price</th>
           <th></th>
           <th></th>
           <th></th>
@@ -19,7 +20,8 @@
             <tr>
               <td><%= product_type.title %></td>
               <td><%= product_type.body %></td>
-              <td><%= product_type.country_id %></td>
+              <td><%= product_type.country.try(:name) %></td>
+              <td><%= product_type.price %></td>
               <td><%= link_to 'Show', product_type %></td>
               <td><%= link_to 'Edit', edit_product_type_path(product_type) %></td>
               <td><%= link_to 'Destroy', product_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>

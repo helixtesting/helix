@@ -55,7 +55,7 @@
                       <ul class="list">
                         <%= form_for(@country, url: root_path, method: :post, html: {class: 'country-select-form', id: 'choose_your_country'}) do |f| %>
                             <span>Choose <%= f.label :country_id %>:<!--Nigeria’s Most Reliable Paternity Testing Service--></span>
-                            <span><%= select :country, :id, Country.all.collect { |c| [c.name, c.id] }, {:prompt => 'Select Country'}, {:class => 'form-control country-select', :onchange => ("$('#choose_your_country').submit()")} %><!--All DNA Testing done in the USA--></span>
+                            <span><%= select :country, :id, Country.all.collect { |c| [c.name, c.id] }, {:prompt => 'Select Country'}, {:class => 'form-control country-select', :onchange => ("if (this.value) window.location.href='?country_id='+this.value")} %><!--All DNA Testing done in the USA--></span>
                             <!--<div class="form-actions">-->
                             <%#= f.submit 'Submit'%>
                             <!--</div>-->

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   private
 
   def check_country
-    if params[:country].present? 
+    if params[:country].present? and params[:country][:id].present?
 	@country = Country.find_by_id(params[:country][:id]) 
      elsif cookies[:country_id].present? 
 	 @country = Country.find_by_id(cookies[:country_id]) 

@@ -1,10 +1,28 @@
-<style type="text/css">
+<style>
+table {
+    border-collapse: collapse;
+    padding: 3px;
+    width:84%;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+td{
+ padding:3px;
+}
+
 .form select {
 display: block;
 color: #000;
 height: 25px;
 width: 157px;
 }
+.form .head{
+  margin-bottom:12px;
+}
+
     .form input[type="text"]{
         display:block;
         background:#fff;
@@ -18,8 +36,17 @@ width: 157px;
         box-shadow: 0 1px 0 #7c7c7c inset, 0 2px 1px #f0f0f0 inset;
         -webkit-box-shadow: 0 1px 0 #7c7c7c inset, 0 2px 1px #f0f0f0 inset;
     }
-</style>
 
+h1{
+    width:auto;
+    margin-bottom:-10px;
+    margin-right:5px;
+    float:right;
+    background:white;
+    font-size:16px;
+    font-weight:bold;
+}
+</style>
 
 <div id="main">
   <div id="content">
@@ -31,58 +58,41 @@ width: 157px;
       <input type=hidden name="recipient" value="ghanaorders@helixtesting.com">
       <input type=hidden name="subject" value="Helix Order Submission">
       <input type=hidden name="redirect" value="http://www.helixtesting.com/beta/order-postback.php">
-
+      <%=hidden_field_tag :country_id , @country.id%>
       <fieldset>
         <div class="section-box">
           <h3 class="title">Select a Kit</h3>
-
-          <div class="column">
-            <img class="alignleft" src="/assets/img-04.png" width="119" height="152" alt="image description"/>
-
-            <div class="description">
-              <input required="required" data-error-message="Please select a package" type="radio" id="package" value="Gold Collection" name="package"/>
-
-              <div class="box">
-                <label for="radio-3" class="head">
-                  <strong>Gold Collection</strong>
-                  <span>Kit and Paternity testing</span>
-                </label>
-
-                <p><strong class="mark">150,000 Naira</strong> per kit</p>
-                <ul class="list-2">
-                  <li>Tests for one (1) alleged father and one (1) child</li>
-                  <li>25 Loci DNA test <a href="#" class="question"></a></li>
-                  <li>Discreetly packaged in plain brown envelope</li>
-                  <li>Next day delivery</li>
-                  <li>Results available in 3-5 business days</li>
-                  <li>Free delivery anywhere in Nigeria</li>
-                </ul>
+          <img class="alignleft" src="/assets/img-04.png" width="119" height="152" alt="image description"/>
+          <div class="column" style="width:15%"><div class="description"><div class="box">&nbsp;</div></div></div>
+    	  <%@product_types.each_with_index do |product_type,index| %>
+            <div class="column" style="width:33%;">
+              <div class="description">
+                <div class="box">
+                    <div style="float:left; clear:none; display:block; padding: 4px 1em 0 0;">
+	                    <input required="required" data-error-message="Please select a package" type="radio" id="package" value="<%=product_type.id%>" name="package"/>
+                    </div>
+		    <br/> <br/>
+                    <label for="radio-3" class="head">
+         	      <strong><%=product_type.title%></strong>
+                      <span><%=product_type.body%></span>
+                    </label>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="column column-2">
-            <img class="alignleft" src="/assets/img-04.png" width="119" height="152" alt="image description"/>
-
-            <div class="description">
-              <input type="radio" id="package2" value="Silver Collection" name="package"/>
-
-              <div class="box">
-                <label for="radio-4" class="head">
-                  <strong>Silver Collection</strong>
-                  <span>Kit and Paternity testing</span>
-                </label>
-                <span><strong class="mark">150,000 Naira</strong> per kit</span>
-                <ul class="list-2">
-                  <li>Tests for one (1) alleged father and one (1) child</li>
-                  <li>16 Loci DNA test <a href="#" class="question"></a></li>
-                  <li>Discreetly packaged in plain brown envelope</li>
-                  <li>Delivery in 7 business days</li>
-                  <li>Results available in 5-10 business days</li>
-                  <li>Free delivery anywhere in Lagos</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+	  <%end%>
+          <table class="" border="0" style="float:left;">
+            <%@country.product_descriptions.each do |description|%>
+ 	      <%if !(description.property_title.empty? or description.description_gold_kit.empty? or description.description_silver_kit.empty?)%>
+	          <tr><td width="20%"><%=description.property_title%></td><td><%=description.description_gold_kit%></td><td><%=description.description_silver_kit%></td></tr>
+              <%end%>
+            <%end%>
+            <tr>
+                <td>Price</td>
+	        <td><h1><%=@product_types.try(:first).try(:price)%> <%=@product_types.try(:first).try(:country).try(:currency)%> per kit</h1></td>
+		<td><h1><%=@product_types.try(:last).try(:price)%> <%=@product_types.try(:last).try(:country).try(:currency)%> per kit</h1></td>
+	    </tr>
+	
+          </table>
         </div>
         <br/><br/><br/>
 
